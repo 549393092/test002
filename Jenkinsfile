@@ -1,10 +1,9 @@
 #!groovy
-
-forkedRepositorySshUrl = "https://github.com/549393092/test002.git"
     
 stage('Commit') {
     node {
         deleteDir()
         checkout scm
+        sh 'mvn -B clean verify'
     }
 }
