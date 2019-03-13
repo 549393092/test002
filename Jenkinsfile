@@ -1,9 +1,11 @@
 #!groovy
     
-stage('Commit') {
+stage("build & SonarQube analysis") {
     node {
         deleteDir()
         checkout scm
-        sh 'mvn -B clean verify'
+        withSonarQubeEnv('SonarQube') {
+           sh 'mvn clean package sonar:sonar'
+        }
     }
 }
